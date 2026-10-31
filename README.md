@@ -16,11 +16,51 @@
 | --- | --- | --- |
 | 工程编译 | 已通过 | 可以生成 ELF、BIN 和 HEX 固件 |
 | 串口 | 已适配 | UART0，PY06 发送、PY07 接收，115200 8N1 |
-| LED | 已适配 | LED4/5/6，依次闪烁 |
+| 按键 | 已适配 | KEY2、KEY3 使用 Zephyr 输入框架；KEY1 是芯片专用 PBUTN |
+| LED | 已适配 | LED4、LED5、LED6，依次闪烁；LED3 是 SD 卡插入指示灯 |
 | NOR Flash | 已适配 | 板载 W25Q256，容量 32 MiB |
 | SDRAM | 已适配 | 板载 W9825G6KH-6，容量 32 MiB，16-bit 总线 |
+| CAN、RS485、RS232 | 可选启用，编译通过 | 分别使用板载收发器，不改动 UART0 控制台 |
+| 双以太网、SD 卡、USB | 可选启用，编译通过 | 默认关闭，需要用 snippet 选择 |
+| OV2640、OV5640 | 可选启用，编译通过 | 两种摄像头配置二选一 |
+| RGB 屏和 GT911 触摸 | 可选启用，编译通过 | 当前提供 800×480 参数，实屏时序仍需验证 |
+| ADC、PWM | 可选启用，编译通过 | 对应底板扩展排针上的通道 |
+| RTC、WM8960、比较器、DAC、GPTMR | 尚缺 Zephyr 驱动 | 接线已经核对，但不能只靠设备树变成可用设备 |
 | 实板运行 | 等待验证 | 还需要在真实开发板上验证烧录、串口和 LED |
-| Ethernet、USB、SD、LCD、CAN | 尚未适配 | 后续逐项增加 |
+
+“编译通过”表示设备树、Kconfig 和驱动可以生成完整固件，不等同于已经在实板上完成电气验证。
+
+## 选择要使用的板载外设
+
+默认配置只启用启动所需功能、UART0、按键和 LED。其他外设用 snippet 开启，这样不会在不知情时占用扩展排针。
+
+例如，启用板载 CAN：
+
+```bash
+west build -p always -b hpm6750_embedfire_btb -S ebf-onboard-can zephyr-embedfire-hpm6750
+```
+
+常用选择如下：
+
+| snippet | 功能 |
+| --- | --- |
+| `ebf-onboard-can` | 板载 CAN2 收发器 |
+| `ebf-rs485` | 板载 RS485 和方向控制脚 |
+| `ebf-rs232` | 两路板载 RS232 |
+| `ebf-ethernet0` / `ebf-ethernet1` | 两个网口，选择其中一个 |
+| `ebf-sdcard` | SD 卡及文件系统块设备 |
+| `ebf-usb-device` | USB1 Type-C 设备模式 |
+| `ebf-camera-ov2640` / `ebf-camera-ov5640` | 摄像头，选择实际安装的型号 |
+| `ebf-rgb-display` | 800×480 RGB 屏和 GT911 触摸 |
+| `ebf-adc-header` | 扩展排针 ADC 通道 |
+| `ebf-pwm1-header` | 扩展排针 PWM1 的 0～5 通道 |
+| `ebf-pwm-header` | 扩展排针 PWM0 CH3、PWM2 CH3、PWM3 CH2 |
+| `ebf-uart2-header` / `ebf-uart11-header` / `ebf-uart12-header` / `ebf-uart13-header` | 扩展排针串口路由 |
+| `ebf-can0-header` / `ebf-can1-pd-header` / `ebf-can1-pb-header` / `ebf-can2-header` | 扩展排针 CAN 控制器路由；需要外接 CAN 收发器 |
+| `ebf-spi2-header` | 扩展排针 SPI2 和片选 |
+
+详细引脚、冲突和验证状态见 [外设与引脚复用表](docs/peripheral-matrix.md)。
+如果同时选择了占用同一引脚的 snippet，配置阶段会直接报出冲突，而不是生成一个行为不确定的固件。
 
 ## 开始前需要准备
 

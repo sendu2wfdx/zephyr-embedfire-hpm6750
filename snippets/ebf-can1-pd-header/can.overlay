@@ -1,0 +1,5 @@
+&can1 {
+	pinctrl-0 = <&pinmux_can1_pd_header>;
+	pinctrl-names = "default";
+	status = "okay";
+};

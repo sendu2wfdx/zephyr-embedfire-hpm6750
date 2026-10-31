@@ -1,0 +1,95 @@
+/* SPDX-License-Identifier: Apache-2.0 */
+
+/*
+ * HPMicro's HPM6750 SoC description currently exposes only UART0/UART13 and
+ * CAN0.  The peripherals below are physically used by the EmbedFire baseboard
+ * and use the same HPMicro Zephyr drivers.  Keep them disabled here; board
+ * snippets select the required pin route and enable them explicitly.
+ */
+
+&{/soc} {
+	uart1: serial@f0044000 {
+		compatible = "hpmicro,hpm-uart";
+		reg = <0xf0044000 0x1000>;
+		interrupts = <32 1>;
+		clocks = <&clk CLOCK_UART1 CLK_SRC_OSC24M 1>;
+		interrupt-parent = <&plic>;
+		current-speed = <115200>;
+		status = "disabled";
+	};
+
+	uart2: serial@f0048000 {
+		compatible = "hpmicro,hpm-uart";
+		reg = <0xf0048000 0x1000>;
+		interrupts = <33 1>, <64 1>;
+		interrupt-names = "uart", "idletimer";
+		clocks = <&clk CLOCK_UART2 CLK_SRC_OSC24M 1>;
+		interrupt-parent = <&plic>;
+		status = "disabled";
+	};
+
+	uart7: serial@f005c000 {
+		compatible = "hpmicro,hpm-uart";
+		reg = <0xf005c000 0x1000>;
+		interrupts = <38 1>;
+		clocks = <&clk CLOCK_UART7 CLK_SRC_OSC24M 1>;
+		interrupt-parent = <&plic>;
+		current-speed = <115200>;
+		status = "disabled";
+	};
+
+	uart10: serial@f0068000 {
+		compatible = "hpmicro,hpm-uart";
+		reg = <0xf0068000 0x1000>;
+		interrupts = <41 1>;
+		clocks = <&clk CLOCK_UART10 CLK_SRC_OSC24M 1>;
+		interrupt-parent = <&plic>;
+		current-speed = <115200>;
+		status = "disabled";
+	};
+
+	uart11: serial@f006c000 {
+		compatible = "hpmicro,hpm-uart";
+		reg = <0xf006c000 0x1000>;
+		interrupts = <42 1>, <65 1>;
+		interrupt-names = "uart", "idletimer";
+		clocks = <&clk CLOCK_UART11 CLK_SRC_OSC24M 1>;
+		interrupt-parent = <&plic>;
+		status = "disabled";
+	};
+
+	uart12: serial@f0070000 {
+		compatible = "hpmicro,hpm-uart";
+		reg = <0xf0070000 0x1000>;
+		interrupts = <43 1>, <65 1>;
+		interrupt-names = "uart", "idletimer";
+		clocks = <&clk CLOCK_UART12 CLK_SRC_OSC24M 1>;
+		interrupt-parent = <&plic>;
+		status = "disabled";
+	};
+
+	can1: can@f0084000 {
+		compatible = "hpmicro,hpm-can";
+		reg = <0xf0084000 0x4000>;
+		interrupts = <48 1>;
+		interrupt-parent = <&plic>;
+		clk-name = <20643884>;
+		clk-source = <3>;
+		clk-divider = <5>;
+		bus-speed = <500000>;
+		status = "disabled";
+	};
+
+	can2: can@f0088000 {
+		compatible = "hpmicro,hpm-can";
+		reg = <0xf0088000 0x4000>;
+		interrupts = <49 1>;
+		interrupt-parent = <&plic>;
+		/* clock_can2 = MAKE_CLOCK_NAME(316, 0, 45) */
+		clk-name = <20709421>;
+		clk-source = <3>;
+		clk-divider = <5>;
+		bus-speed = <500000>;
+		status = "disabled";
+	};
+};

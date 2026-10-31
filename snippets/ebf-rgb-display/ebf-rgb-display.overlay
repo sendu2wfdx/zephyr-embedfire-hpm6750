@@ -1,0 +1,11 @@
+/ {
+	chosen {
+		zephyr,display = &panel_rgb;
+	};
+};
+
+&lcdc0 { status = "okay"; };
+&rgb0 { status = "okay"; };
+&panel_rgb { status = "okay"; };
+&i2c0 { status = "okay"; };
+&touch_rgb { status = "okay"; };

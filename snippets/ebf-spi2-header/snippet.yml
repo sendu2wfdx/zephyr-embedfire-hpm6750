@@ -1,0 +1,4 @@
+name: ebf-spi2-header
+append:
+  EXTRA_CONF_FILE: spi.conf
+  EXTRA_DTC_OVERLAY_FILE: spi.overlay

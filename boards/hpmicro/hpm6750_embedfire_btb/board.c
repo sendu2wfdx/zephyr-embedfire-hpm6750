@@ -6,6 +6,7 @@
 #include <hpm_soc.h>
 #include <hpm_clock_drv.h>
 #include <hpm_femc_drv.h>
+#include <hpm_sdxc_drv.h>
 
 static void init_sdram_pins(void)
 {
@@ -94,6 +95,39 @@ void _init_ext_ram(void)
 	sdram_config.delay_cell_value = 0;
 
 	femc_config_sdram(HPM_FEMC, femc_clk_in_hz, &sdram_config);
+}
+
+uint32_t hpm_board_sd_configure_clock(SDXC_Type *ptr, uint32_t freq,
+				      bool need_inverse)
+{
+	clock_name_t sdxc_clk;
+
+	if (ptr != HPM_SDXC1) {
+		return 0U;
+	}
+
+	sdxc_clk = clock_sdxc1;
+	sdxc_enable_inverse_clock(ptr, false);
+	sdxc_enable_sd_clock(ptr, false);
+
+	if (freq <= 400000UL) {
+		clock_set_source_divider(sdxc_clk, clk_src_osc24m, 63U);
+	} else if (freq <= 26000000UL) {
+		clock_set_source_divider(sdxc_clk, clk_src_osc24m, 1U);
+	} else if (freq <= 52000000UL) {
+		clock_set_source_divider(sdxc_clk, clk_src_pll1_clk1, 8U);
+	} else if (freq <= 100000000UL) {
+		clock_set_source_divider(sdxc_clk, clk_src_pll1_clk1, 4U);
+	} else if (freq <= 208000000UL) {
+		clock_set_source_divider(sdxc_clk, clk_src_pll2_clk0, 2U);
+	} else {
+		clock_set_source_divider(sdxc_clk, clk_src_osc24m, 1U);
+	}
+
+	sdxc_enable_inverse_clock(ptr, need_inverse);
+	sdxc_enable_sd_clock(ptr, true);
+
+	return clock_get_frequency(sdxc_clk);
 }
 
 void sys_arch_reboot(int type)

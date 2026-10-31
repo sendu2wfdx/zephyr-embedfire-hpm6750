@@ -1,0 +1,4 @@
+name: ebf-onboard-can
+append:
+  EXTRA_CONF_FILE: ebf-onboard-can.conf
+  EXTRA_DTC_OVERLAY_FILE: ebf-onboard-can.overlay

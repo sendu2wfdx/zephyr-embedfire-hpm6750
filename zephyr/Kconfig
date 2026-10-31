@@ -1,0 +1,21 @@
+# SPDX-License-Identifier: Apache-2.0
+
+config EBF_HPM6750_PWM1_HEADER
+	bool "EmbedFire HPM6750 internal PWM1 header route marker"
+	default n
+
+config EBF_HPM6750_SPI2_HEADER
+	bool "EmbedFire HPM6750 internal SPI2 header route marker"
+	default n
+
+config EBF_HPM6750_CAN1_PB_HEADER
+	bool "EmbedFire HPM6750 internal CAN1 PB route marker"
+	default n
+
+config EBF_HPM6750_CAN2_ONBOARD
+	bool "EmbedFire HPM6750 internal onboard CAN2 route marker"
+	default n
+
+config EBF_HPM6750_CAN2_HEADER
+	bool "EmbedFire HPM6750 internal header CAN2 route marker"
+	default n

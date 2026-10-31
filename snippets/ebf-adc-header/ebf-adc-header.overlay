@@ -1,0 +1,15 @@
+&adc1 {
+	pinctrl-0 = <&pinmux_adc1_header>;
+	pinctrl-names = "default";
+	/* Required by the current HPM ADC12 driver even for software trigger. */
+	trig-base = <0xf021c000>;
+	trig-num = <49>;
+	trig-input-src = <0>;
+	status = "okay";
+};
+
+&adc3 {
+	pinctrl-0 = <&pinmux_adc3_header>;
+	pinctrl-names = "default";
+	status = "okay";
+};

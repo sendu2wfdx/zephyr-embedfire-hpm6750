@@ -1,0 +1,4 @@
+name: ebf-ethernet1
+append:
+  EXTRA_CONF_FILE: ebf-ethernet.conf
+  EXTRA_DTC_OVERLAY_FILE: ebf-ethernet1.overlay

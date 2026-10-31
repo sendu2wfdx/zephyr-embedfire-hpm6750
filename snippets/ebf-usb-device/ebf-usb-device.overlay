@@ -1,0 +1,11 @@
+/ {
+	chosen {
+		zephyr,udc = &usb1;
+	};
+};
+
+&usb1 {
+	pinctrl-0 = <&pinmux_usb1_otg>;
+	pinctrl-names = "default";
+	status = "okay";
+};

@@ -1,0 +1,4 @@
+name: ebf-usb-device
+append:
+  EXTRA_CONF_FILE: ebf-usb-device.conf
+  EXTRA_DTC_OVERLAY_FILE: ebf-usb-device.overlay

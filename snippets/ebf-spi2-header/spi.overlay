@@ -1,0 +1,6 @@
+&spi2 {
+	pinctrl-0 = <&pinmux_spi2_header>;
+	pinctrl-names = "default";
+	cs-gpios = <&gpiob 24 GPIO_ACTIVE_LOW>;
+	status = "okay";
+};

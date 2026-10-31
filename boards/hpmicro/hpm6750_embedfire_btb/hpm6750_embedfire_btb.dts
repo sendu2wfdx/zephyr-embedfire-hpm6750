@@ -3,7 +3,10 @@
 /dts-v1/;
 
 #include <hpmicro/hpm6750.dtsi>
+#include "hpm6750_embedfire_btb-soc.dtsi"
 #include "hpm6750_embedfire_btb-pinctrl.dtsi"
+#include <zephyr/dt-bindings/display/panel.h>
+#include <zephyr/dt-bindings/input/input-event-codes.h>
 
 / {
 	model = "EmbedFire HPM6750 BTB";
@@ -13,6 +16,8 @@
 		led0 = &led4;
 		led1 = &led5;
 		led2 = &led6;
+		sw0 = &key2;
+		sw1 = &key3;
 	};
 
 	chosen {
@@ -49,10 +54,78 @@
 			label = "LED6";
 		};
 	};
+
+	gpio_keys {
+		compatible = "gpio-keys";
+
+		key2: key_2 {
+			gpios = <&gpioz 9 (GPIO_PULL_UP | GPIO_ACTIVE_LOW)>;
+			label = "KEY2";
+			zephyr,code = <INPUT_KEY_0>;
+		};
+
+		key3: key_3 {
+			gpios = <&gpioz 11 (GPIO_PULL_UP | GPIO_ACTIVE_LOW)>;
+			label = "KEY3";
+			zephyr,code = <INPUT_KEY_1>;
+		};
+	};
+
+	/* KEY1 is wired to the dedicated PBUTN input, not to a GPIO. */
+
+	panels {
+		panel_rgb: panel_rgb {
+			compatible = "hpmicro,hpm-display-rgb";
+			panel_name = "embedfire-rgb-800x480";
+			width = <800>;
+			height = <480>;
+			pixel_clock_khz = <33000>;
+			hactive = <800>;
+			hfront_porch = <40>;
+			hback_porch = <88>;
+			hsync_len = <48>;
+			hsync_pol = <0>;
+			vactive = <480>;
+			vfront_porch = <13>;
+			vback_porch = <32>;
+			vsync_len = <3>;
+			vsync_pol = <0>;
+			de_pol = <0>;
+			pixel_clk_pol = <0>;
+			pixel-format = <PANEL_PIXEL_FORMAT_RGB_565>;
+			status = "disabled";
+		};
+	};
+
+	video {
+		video_ov2640: video_ov2640 {
+			compatible = "hpmicro,hpm-video";
+			video_count = <1>;
+			sensor = <&ov2640>;
+			camera = <&camera0>;
+			status = "disabled";
+		};
+
+		video_ov5640: video_ov5640 {
+			compatible = "hpmicro,hpm-video";
+			video_count = <1>;
+			sensor = <&ov5640>;
+			camera = <&camera0>;
+			status = "disabled";
+		};
+	};
 };
 
 &rgb0 {
 	endpoint_in = <&lcdc0>;
+};
+
+&panel_rgb {
+	endpoint_in = <&rgb0>;
+	pinctrl-0 = <&pinmux_rgb>;
+	pinctrl-names = "default";
+	backlight-gpios = <&gpiob 23 GPIO_ACTIVE_HIGH>;
+	status = "disabled";
 };
 
 &uart0 {
@@ -77,8 +150,93 @@
 	status = "okay";
 };
 
+&gpioa {
+	status = "okay";
+};
+
+&gpiod {
+	status = "okay";
+};
+
+&gpioe {
+	status = "okay";
+};
+
+&gpiof {
+	status = "okay";
+};
+
+&gpioz {
+	pinctrl-0 = <&pinmux_gpioz_keys>;
+	pinctrl-names = "default";
+	status = "okay";
+};
+
 &hdma {
 	status = "okay";
+};
+
+&i2c0 {
+	clock-frequency = <I2C_BITRATE_STANDARD>;
+	pinctrl-0 = <&pinmux_i2c0>;
+	pinctrl-names = "default";
+	status = "disabled";
+
+	touch_rgb: gt911@5d {
+		compatible = "goodix,gt911";
+		reg = <0x5d>;
+		irq-gpios = <&gpiob 8 GPIO_ACTIVE_HIGH>;
+		reset-gpios = <&gpiob 9 GPIO_ACTIVE_LOW>;
+		status = "disabled";
+	};
+};
+
+&i2c3 {
+	clock-frequency = <I2C_BITRATE_STANDARD>;
+	pinctrl-0 = <&pinmux_i2c3>;
+	pinctrl-names = "default";
+	status = "disabled";
+
+	ov2640: camera@30 {
+		compatible = "ovti,ov2640";
+		reg = <0x30>;
+		reset-gpios = <&gpioe 5 GPIO_ACTIVE_LOW>;
+		status = "disabled";
+	};
+
+	ov5640: camera@3c {
+		compatible = "ovti,ov5640";
+		reg = <0x3c>;
+		reset-gpios = <&gpioe 5 GPIO_ACTIVE_LOW>;
+		powerdown-gpios = <&gpioe 0 GPIO_ACTIVE_HIGH>;
+		status = "disabled";
+	};
+};
+
+&camera0 {
+	interface = "dvp";
+	pinctrl-0 = <&pinmux_dvp0>;
+	pinctrl-names = "default";
+	pixclk_sampling_falling = <0>;
+	hsync_active_low = <0>;
+	vsync_active_low = <0>;
+	status = "disabled";
+};
+
+&eth0 {
+	pinctrl-0 = <&pinmux_eth0_rmii>;
+	pinctrl-names = "default";
+	phy-addr = <0>;
+	reset-gpios = <&gpioe 29 GPIO_ACTIVE_LOW>;
+	status = "disabled";
+};
+
+&eth1 {
+	pinctrl-0 = <&pinmux_eth1_rmii>;
+	pinctrl-names = "default";
+	phy-addr = <0>;
+	reset-gpios = <&gpioe 24 GPIO_ACTIVE_LOW>;
+	status = "disabled";
 };
 
 &xpi0 {

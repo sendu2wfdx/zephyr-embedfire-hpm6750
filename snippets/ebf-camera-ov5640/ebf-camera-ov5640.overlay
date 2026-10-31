@@ -1,0 +1,4 @@
+&i2c3 { status = "okay"; };
+&ov5640 { status = "okay"; };
+&camera0 { status = "okay"; };
+&video_ov5640 { status = "okay"; };

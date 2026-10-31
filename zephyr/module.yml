@@ -1,5 +1,8 @@
 name: embedfire_hpm6750
 build:
+  cmake: zephyr
+  kconfig: zephyr/Kconfig
   settings:
     board_root: .
+    snippet_root: .
 

@@ -1,0 +1,20 @@
+/ {
+	aliases {
+		rs232-1 = &uart7;
+		rs232-2 = &uart10;
+	};
+};
+
+&uart7 {
+	current-speed = <115200>;
+	pinctrl-0 = <&pinmux_uart7>;
+	pinctrl-names = "default";
+	status = "okay";
+};
+
+&uart10 {
+	current-speed = <115200>;
+	pinctrl-0 = <&pinmux_uart10>;
+	pinctrl-names = "default";
+	status = "okay";
+};

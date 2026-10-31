@@ -1,0 +1,6 @@
+&uart12 {
+	current-speed = <115200>;
+	pinctrl-0 = <&pinmux_uart12_header>;
+	pinctrl-names = "default";
+	status = "okay";
+};

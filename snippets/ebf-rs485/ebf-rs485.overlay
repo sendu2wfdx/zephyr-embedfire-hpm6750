@@ -1,0 +1,16 @@
+/ {
+	aliases {
+		rs485-uart = &uart1;
+	};
+
+	zephyr,user {
+		rs485-de-gpios = <&gpiob 20 GPIO_ACTIVE_HIGH>;
+	};
+};
+
+&uart1 {
+	current-speed = <115200>;
+	pinctrl-0 = <&pinmux_uart1>;
+	pinctrl-names = "default";
+	status = "okay";
+};

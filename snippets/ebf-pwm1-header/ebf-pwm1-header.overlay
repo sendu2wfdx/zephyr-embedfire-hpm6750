@@ -1,0 +1,7 @@
+&pwm1 {
+	pinctrl-0 = <&pinmux_pwm1_header>;
+	pinctrl-names = "default";
+	period-init = <50>;
+	dead-zone-in-half-cycle = <100>;
+	status = "okay";
+};

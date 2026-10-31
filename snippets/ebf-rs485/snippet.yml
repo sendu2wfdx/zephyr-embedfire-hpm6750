@@ -1,0 +1,4 @@
+name: ebf-rs485
+append:
+  EXTRA_CONF_FILE: ebf-rs485.conf
+  EXTRA_DTC_OVERLAY_FILE: ebf-rs485.overlay

@@ -1,0 +1,19 @@
+ / {
+	aliases {
+		sdhc0 = &sd;
+	};
+};
+
+&sd {
+	pinctrl-0 = <&pinmux_sdxc1>;
+	pinctrl-names = "default";
+	cd-gpios = <&gpiod 28 (GPIO_PULL_UP | GPIO_ACTIVE_LOW)>;
+	pwr-3v3-support;
+	embedded-4-bit-support;
+	status = "okay";
+
+	sdmmc {
+		compatible = "zephyr,sdmmc-disk";
+		status = "okay";
+	};
+};

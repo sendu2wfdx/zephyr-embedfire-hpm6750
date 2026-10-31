@@ -1,0 +1,4 @@
+name: ebf-uart11-header
+append:
+  EXTRA_CONF_FILE: uart.conf
+  EXTRA_DTC_OVERLAY_FILE: uart.overlay

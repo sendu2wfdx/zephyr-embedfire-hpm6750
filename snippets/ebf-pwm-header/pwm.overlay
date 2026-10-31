@@ -1,0 +1,23 @@
+&pwm0 {
+	pinctrl-0 = <&pinmux_pwm0_ch3_header>;
+	pinctrl-names = "default";
+	period-init = <50>;
+	dead-zone-in-half-cycle = <100>;
+	status = "okay";
+};
+
+&pwm2 {
+	pinctrl-0 = <&pinmux_pwm2_ch3_header>;
+	pinctrl-names = "default";
+	period-init = <50>;
+	dead-zone-in-half-cycle = <100>;
+	status = "okay";
+};
+
+&pwm3 {
+	pinctrl-0 = <&pinmux_pwm3_ch2_header>;
+	pinctrl-names = "default";
+	period-init = <50>;
+	dead-zone-in-half-cycle = <100>;
+	status = "okay";
+};
