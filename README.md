@@ -150,12 +150,6 @@ west flash
 zephyr-embedfire-hpm6750/boards/hpmicro/hpm6750_embedfire_btb/
 ```
 
-## 关于 LED 和 SDRAM 引脚
-
-HPM6750 的 PB29、PB30、PB31 可以复用为 FEMC 功能，但在野火这块开发板上，这三个引脚实际连接的是 LED4、LED5、LED6。
-
-板载 SDRAM 的物理线路在 PC/PD 引脚组。本项目只把实际连接 SDRAM 的 PC/PD 引脚配置为 FEMC，因此 SDRAM 和三颗 LED 可以同时使用，不存在引脚冲突。
-
 ## 遇到问题时先检查
 
 - `west init` 或 `west update` 失败：检查网络以及 Git 是否能正常访问 GitHub。
