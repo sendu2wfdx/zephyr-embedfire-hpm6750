@@ -51,6 +51,10 @@
 	};
 };
 
+&rgb0 {
+	endpoint_in = <&lcdc0>;
+};
+
 &uart0 {
 	status = "okay";
 	current-speed = <115200>;
