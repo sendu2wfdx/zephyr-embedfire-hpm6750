@@ -1,0 +1,5 @@
+# SPDX-License-Identifier: Apache-2.0
+
+config BOARD_HPM6750_EMBEDFIRE_BTB
+	select SOC_HPM6750
+

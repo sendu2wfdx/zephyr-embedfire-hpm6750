@@ -1,0 +1,11 @@
+# SPDX-License-Identifier: Apache-2.0
+
+if BOARD_HPM6750_EMBEDFIRE_BTB
+
+config INIT_EXT_RAM
+	bool "Initialize the board SDRAM"
+	default y
+	select HAS_HPMSDK_FEMC
+
+endif
+

@@ -1,0 +1,12 @@
+manifest:
+  version: "1.0"
+
+  projects:
+    - name: sdk_glue
+      url: https://github.com/hpmicro/zephyr_sdk_glue.git
+      revision: 1756cb8fbef2334d9ad89aef08a01233f8502919
+      import: true
+
+  self:
+    path: zephyr-embedfire-hpm6750
+

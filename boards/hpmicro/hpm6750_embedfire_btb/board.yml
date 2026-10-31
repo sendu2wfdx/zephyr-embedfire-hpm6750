@@ -1,0 +1,6 @@
+board:
+  name: hpm6750_embedfire_btb
+  vendor: hpmicro
+  socs:
+    - name: hpm6750
+

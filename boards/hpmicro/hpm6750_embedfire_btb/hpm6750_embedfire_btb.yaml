@@ -1,0 +1,17 @@
+identifier: hpm6750_embedfire_btb
+name: EmbedFire HPM6750 BTB
+type: mcu
+arch: riscv32
+toolchain:
+  - zephyr
+  - cross-compile
+ram: 768
+flash: 32768
+supported:
+  - gpio
+  - uart
+testing:
+  ignore_tags:
+    - bluetooth
+vendor: hpmicro
+
