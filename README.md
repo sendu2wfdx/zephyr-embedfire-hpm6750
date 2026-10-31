@@ -17,7 +17,7 @@ PB29/PB30/PB31 具有 FEMC 复用功能，但野火这块板的 16-bit SDRAM 物
 ## 初始化工作区
 
 ```bash
-west init -m https://github.com/OWNER/zephyr-embedfire-hpm6750.git hpm6750-zephyr
+west init -m https://github.com/sendu2wfdx/zephyr-embedfire-hpm6750.git hpm6750-zephyr
 cd hpm6750-zephyr
 west update
 west supply
