@@ -64,6 +64,6 @@
 
 ## 当前构建结论
 
-基础配置以及板载 CAN、RS485、RS232、Ethernet 0、Ethernet 1、SD、USB device、OV2640、OV5640、RGB+GT911、ADC、PWM0/1/2/3、扩展 UART2/11/12/13、CAN0/1/2 和 SPI2 均完成了独立完整构建。PWM1/SPI2、PWM1/CAN1-PB、板载 CAN2/扩展 CAN2 的冲突组合也完成了反向测试，配置系统会拒绝这些组合。构建过程中对 sdk_glue 当前版本的三个缺口做了板级兼容：RMII PHY 结构字段、ADC 缺少地址转换声明、SDHC 缺少板级时钟回调。
+基础配置以及板载 CAN、RS485、RS232、Ethernet 0、Ethernet 1、SD、USB device、OV2640、OV5640、RGB+GT911、ADC、PWM0/1/2/3、扩展 UART2/11/12/13、CAN0/1/2 和 SPI2 均完成了独立完整构建。PWM1/SPI2、PWM1/CAN1-PB、板载 CAN2/扩展 CAN2 的冲突组合也完成了反向测试，配置系统会拒绝这些组合。RMII PHY 和 ADC 的通用兼容修复已经移入项目维护的 Glue；SDHC 时钟配置继续由板级代码按照实际时钟树提供。
 
 仍需实板逐项验证：PHY 地址与参考时钟方向、SD 卡插拔极性、USB ID 行为、摄像头复位时序、屏幕精确时序和触摸中断极性。未经实板确认前，不把这些项目标成“硬件验证通过”。
