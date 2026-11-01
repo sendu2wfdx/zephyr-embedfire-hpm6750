@@ -8,7 +8,7 @@
 - **板级支持**：告诉 Zephyr 这块板使用什么芯片，以及 LED、串口、Flash 和 SDRAM 接到了哪些引脚。
 - **west**：Zephyr 的项目管理命令，用来下载源码、编译和烧录程序。
 
-本项目使用 Zephyr 3.7 LTS、HPMicro `zephyr_sdk_glue` 和 HPM SDK 1.11.0。依赖版本已经锁定，不需要自行选择版本。
+本项目使用 Zephyr 3.7 LTS、项目维护的 [`zephyr-hpmicro-glue`](https://github.com/sendu2wfdx/zephyr-hpmicro-glue) 和 HPM SDK 1.11.0。依赖版本已经锁定，不需要自行选择版本。
 
 ## 目前能做什么
 

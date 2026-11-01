@@ -3,8 +3,8 @@ manifest:
 
   projects:
     - name: sdk_glue
-      url: https://github.com/hpmicro/zephyr_sdk_glue.git
-      revision: 1756cb8fbef2334d9ad89aef08a01233f8502919
+      url: https://github.com/sendu2wfdx/zephyr-hpmicro-glue.git
+      revision: f10735b71ec7dff2399a763fabd7f02d1f6fe411
       import: true
 
   self:
